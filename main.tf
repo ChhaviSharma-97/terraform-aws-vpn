@@ -20,7 +20,7 @@ output "test" {
 }
 
 data "template_file" "user_data" {
-    template = file("${path.module}/user_data.sh")
+    template = file("${path.module}/userdata.sh")
 }
 
 resource "aws_instance" "ec2" {
@@ -29,7 +29,6 @@ resource "aws_instance" "ec2" {
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.security_groups
     key_name                = var.key_name
-    iam_instance_profile    = var.iam_instance_profile
     ebs_optimized           = var.ebs_optimized
     disable_api_termination = var.disable_api_termination
     disable_api_stop        = var.disable_api_stop
