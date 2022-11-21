@@ -69,3 +69,11 @@ output "public_ip" {
   value = aws_instance.ec2.public_ip
 }
 <!--- END_TF_DOCS --->
+
+## Authors
+
+Module managed by [TO THE NEW Pvt. Ltd.](https://github.com/tothenew)
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/tothenew/terraform-aws-rds/blob/main/LICENSE) for full details.
