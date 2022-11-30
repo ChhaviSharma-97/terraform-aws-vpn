@@ -15,10 +15,6 @@ data "aws_ami" "ubuntu" {
     owners = ["099720109477"]
 }
 
-output "test" {
-  value = data.aws_ami.ubuntu
-}
-
 data "template_file" "user_data" {
     template = file("${path.module}/userdata.sh")
 }
@@ -34,9 +30,9 @@ resource "aws_instance" "ec2" {
     disable_api_stop        = var.disable_api_stop
     user_data_base64        = base64encode(data.template_file.user_data.rendered)
     source_dest_check       = var.source_dest_check
-
-    volume_tags = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-jenkins" }))
-    tags        = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-jenkins" }))
+    iam_instance_profile = var.iam_instance_profile
+    volume_tags = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
+    tags        = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
 
     root_block_device {
       delete_on_termination = var.delete_on_termination
@@ -44,4 +40,17 @@ resource "aws_instance" "ec2" {
       volume_size           = var.root_volume_size
       volume_type           = var.volume_type
     }
+    connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    private_key = "${file("/home/username/key.pem")}"
+    host     = "${self.public_ip}"
+  }
+     provisioner "remote-exec" {
+         when = destroy
+         inline = [
+             "aws ssm delete-parameter --name 'pritunl-username'",
+             "aws ssm delete-parameter --name 'pritunl-password'"
+        ]
+}
 }

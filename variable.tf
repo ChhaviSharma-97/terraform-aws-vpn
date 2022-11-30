@@ -77,3 +77,14 @@ variable "source_dest_check" {
     type        = bool
     default     = true
 }
+variable "iam_instance_profile" {
+    description = "iam_instance_profile"
+    type        = string
+    default     = ""
+}
+# variable "pritunl_username_param_name" {
+#   default = "pritunl-username"
+# }
+# variable "pritunl_password_param_name" {
+#   default = "pritunl-password"
+# }

@@ -1,9 +1,9 @@
 module "vpn" {
-    source                    = "git::https://github.com/tothenew/terraform-aws-vpn.git"
-    key_name                  = "tothenew"
-    iam_instance_profile      = "tothenew"
-    security_groups           = ["sg-999999999999"]
-    subnet_id                 = "subnet-999999999999"
+    source                    = "../"
+    key_name                  = var.key_name
+    security_groups           = var.security_groups
+    iam_instance_profile      = var.iam_instance_profile
+    subnet_id                 = var.subnet_id
     project_name_prefix       = "dev-tothenew"
     common_tags               = {
       "Project"     = "ToTheNew",

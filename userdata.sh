@@ -22,3 +22,39 @@ ufw disable
 apt -y install pritunl mongodb-org
 systemctl enable mongod pritunl
 systemctl start mongod pritunl
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# cat <<<'{
+#     "debug": false,
+#     "bind_addr": "0.0.0.0",
+#     "port": 443,
+#     "log_path": "/var/log/pritunl.log",
+#     "temp_path": "/tmp/pritunl_%r",
+#     "local_address_interface": "auto",
+#     "mongodb_uri": "mongodb://localhost:27017/pritunl"
+# }' > /etc/pritunl.conf
+pritunl set-mongodb "mongodb://localhost:27017/pritunl"
+
+systemctl restart pritunl
+
+username=`sudo pritunl default-password | grep username | cut -d ":" -f2 |tr -d '"'|tr '\n' ' ' | tr -d ' '`
+password=`sudo pritunl default-password | grep password: | cut -d ":" -f2 |  tr -d '"'|tr '\n' ' ' | tr -d ' '`
+
+# echo "export username=$username" >> .bashrc
+# echo "export password=$password" >> .bashrc
+
+# source .bashrc
+echo "username = $username" > /home/ubuntu/creds.txt
+echo "password = $password" >> /home/ubuntu/creds.txt
+aws ssm put-parameter \
+    --name "pritunl-username" \
+    --value $username \
+    --type SecureString
+
+aws ssm put-parameter \
+    --name "pritunl-password" \
+    --value $password \
+    --type SecureString

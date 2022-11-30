@@ -1,4 +1,4 @@
-# terraform-aws-jenkins
+# terraform-aws-vpn
 
 ## Usage
 
