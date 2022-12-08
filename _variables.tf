@@ -1,6 +1,14 @@
-variable "name" {
-  description = "Name prefix for the resources of this stack"
+variable "create_aws_vpn" {
+  type = bool
+  default = false
 }
+variable "create_aws_ec2_pritunl" {
+  type = bool
+  default = false
+}
+# variable "name" {
+#   description = "Name prefix for the resources of this stack"
+# }
 
 variable "cidr" {
   description = "Network CIDR to use for clients"
@@ -123,12 +131,6 @@ variable "ebs_optimized" {
   type        = bool
   default     = true
 }
-
-variable "security_groups" {
-  description = "A string value for Security Group ID"
-  type        = list(string)
-}
-
 variable "common_tags" {
   description = "A mapping of tags to assign to the resource"
   type        = map(string)

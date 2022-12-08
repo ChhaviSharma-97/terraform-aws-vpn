@@ -1,8 +1,10 @@
 resource "tls_private_key" "server" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   algorithm = "RSA"
 }
 
 resource "tls_cert_request" "server" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   private_key_pem = tls_private_key.server.private_key_pem
 
   subject {
@@ -12,6 +14,7 @@ resource "tls_cert_request" "server" {
 }
 
 resource "tls_locally_signed_cert" "server" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   cert_request_pem   = tls_cert_request.server.cert_request_pem
   ca_private_key_pem = tls_private_key.ca.private_key_pem
   ca_cert_pem        = tls_self_signed_cert.ca.cert_pem
@@ -26,6 +29,7 @@ resource "tls_locally_signed_cert" "server" {
 }
 
 resource "aws_acm_certificate" "server" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   private_key       = tls_private_key.server.private_key_pem
   certificate_body  = tls_locally_signed_cert.server.cert_pem
   certificate_chain = tls_self_signed_cert.ca.cert_pem

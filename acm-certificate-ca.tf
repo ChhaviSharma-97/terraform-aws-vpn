@@ -1,8 +1,10 @@
 resource "tls_private_key" "ca" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   algorithm = "RSA"
 }
 
 resource "tls_self_signed_cert" "ca" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   private_key_pem = tls_private_key.ca.private_key_pem
 
   subject {
@@ -20,6 +22,7 @@ resource "tls_self_signed_cert" "ca" {
 }
 
 resource "aws_acm_certificate" "ca" {
+  count       = !var.create_aws_ec2_pritunl && var.create_aws_vpn ? 1: 0
   private_key      = tls_private_key.ca.private_key_pem
   certificate_body = tls_self_signed_cert.ca.cert_pem
 }
