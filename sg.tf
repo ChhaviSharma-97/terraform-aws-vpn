@@ -1,6 +1,6 @@
 resource "aws_security_group" "default" {
   count       = var.security_group_id == "" ? 1 : 0
-  name_prefix = "${var.name}-Client-VPN"
+  name_prefix = "${var.project_name_prefix}-Client-VPN"
   description = "security group allowing egress for client-vpn users"
   vpc_id      = var.vpc_id
   ingress {
@@ -10,8 +10,8 @@ resource "aws_security_group" "default" {
      cidr_blocks = ["0.0.0.0/0"]
    }
   tags = {
-    Name               = "${var.name}-Client-VPN"
-    EnvName            = var.name
+    Name               = "${var.project_name_prefix}-Client-VPN"
+    EnvName            = var.project_name_prefix
     Service            = "client-vpn"
     TerraformWorkspace = terraform.workspace
   }
