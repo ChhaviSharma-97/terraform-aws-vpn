@@ -41,12 +41,6 @@ resource "aws_instance" "ec2" {
     volume_type           = var.volume_type
   }
   
-resource "aws_eip" "pritunl-eip" {
-  vpc                       = true
-  instance                  = aws_instance.ec2.id
-  associate_with_private_ip = aws_instance.ec2.private_ip
-  tags                      = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
-}
   # connection {
   #   type        = "ssh"
   #   user        = "ubuntu"
@@ -60,4 +54,11 @@ resource "aws_eip" "pritunl-eip" {
   #     "aws ssm delete-parameter --name 'pritunl-password'"
   #   ]
   # }
+}
+
+resource "aws_eip" "pritunl-eip" {
+  vpc                       = true
+  instance                  = aws_instance.ec2.id
+  associate_with_private_ip = aws_instance.ec2.private_ip
+  tags                      = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
 }
