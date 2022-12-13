@@ -40,21 +40,21 @@ pritunl set-mongodb "mongodb://localhost:27017/pritunl"
 
 systemctl restart pritunl
 
-username=`sudo pritunl default-password | grep username | cut -d ":" -f2 |tr -d '"'|tr '\n' ' ' | tr -d ' '`
-password=`sudo pritunl default-password | grep password: | cut -d ":" -f2 |  tr -d '"'|tr '\n' ' ' | tr -d ' '`
+# username=`sudo pritunl default-password | grep username | cut -d ":" -f2 |tr -d '"'|tr '\n' ' ' | tr -d ' '`
+# password=`sudo pritunl default-password | grep password: | cut -d ":" -f2 |  tr -d '"'|tr '\n' ' ' | tr -d ' '`
 
 # echo "export username=$username" >> .bashrc
 # echo "export password=$password" >> .bashrc
 
 # source .bashrc
-echo "username = $username" > /home/ubuntu/creds.txt
-echo "password = $password" >> /home/ubuntu/creds.txt
-aws ssm put-parameter \
-    --name "pritunl-username" \
-    --value $username \
-    --type SecureString
+# echo "username = $username" > /home/ubuntu/creds.txt
+# echo "password = $password" >> /home/ubuntu/creds.txt
+# aws ssm put-parameter \
+#     --name "pritunl-username" \
+#     --value $username \
+#     --type SecureString
 
-aws ssm put-parameter \
-    --name "pritunl-password" \
-    --value $password \
-    --type SecureString
+# aws ssm put-parameter \
+#     --name "pritunl-password" \
+#     --value $password \
+#     --type SecureString

@@ -41,17 +41,17 @@ resource "aws_instance" "ec2" {
     volume_size           = var.root_volume_size
     volume_type           = var.volume_type
   }
-  connection {
-    type        = "ssh"
-    user        = "ubuntu"
-    private_key = file("/home/username/key.pem")
-    host        = self.public_ip
-  }
-  provisioner "remote-exec" {
-    when = destroy
-    inline = [
-      "aws ssm delete-parameter --name 'pritunl-username'",
-      "aws ssm delete-parameter --name 'pritunl-password'"
-    ]
-  }
+  # connection {
+  #   type        = "ssh"
+  #   user        = "ubuntu"
+  #   private_key = file("/home/username/key.pem")
+  #   host        = self.public_ip
+  # }
+  # provisioner "remote-exec" {
+  #   when = destroy
+  #   inline = [
+  #     "aws ssm delete-parameter --name 'pritunl-username'",
+  #     "aws ssm delete-parameter --name 'pritunl-password'"
+  #   ]
+  # }
 }
