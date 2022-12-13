@@ -6,6 +6,7 @@ variable "subnet_id" {
 variable "security_groups" {
   description = "A string value for Security Group ID"
   type        = list(string)
+  default = ""
 }
 
 variable "iam_instance_profile" {
@@ -97,11 +98,13 @@ variable "create_aws_ec2_pritunl" {
 
 variable "cidr" {
   description = "Network CIDR to use for clients"
+  default = ""
 }
 
 variable "subnet_ids" {
   type        = list(string)
   description = "Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved)"
+  default = ""
 }
 
 variable "allowed_cidr_ranges" {
@@ -174,10 +177,13 @@ variable "vpn_port" {
 }
 
 variable "ca_common_name" {
+  default = ""
 }
 
 variable "root_common_name" {
+  default = ""
 }
 
 variable "server_common_name" {
+  default = ""
 }
