@@ -41,8 +41,8 @@ module "vpn" {
 | allowed\_cidr\_ranges | List of CIDR ranges from which access is allowed | `list(string)` | `[]` | no |
 | authentication\_saml\_provider\_arn | (Optional) The ARN of the IAM SAML identity provider if type is federated-authentication. | `any` | `null` | no |
 | authentication\_type | The type of client authentication to be used. Specify certificate-authentication to use certificate-based authentication, directory-service-authentication to use Active Directory authentication, or federated-authentication to use Federated Authentication via SAML 2.0. | `string` | `"certificate-authentication"` | no |
-| ca\_common\_name | n/a | `any` | n/a | yes |
-| cidr | Network CIDR to use for clients | `any` | n/a | yes |
+| ca\_common\_name | n/a | `string` | `""` | no |
+| cidr | Network CIDR to use for clients | `string` | `""` | no |
 | common\_tags | A mapping of tags to assign to the resource | `map(string)` | n/a | yes |
 | create\_aws\_ec2\_pritunl | n/a | `bool` | `false` | no |
 | create\_aws\_vpn | n/a | `bool` | `false` | no |
@@ -59,15 +59,15 @@ module "vpn" {
 | logs\_retention | Retention in days for CloudWatch Log Group | `number` | `365` | no |
 | organization\_name | Name of organization to use in private certificate | `string` | `"ACME, Inc"` | no |
 | project\_name\_prefix | A string value to describe prefix of all the resources | `string` | `"dev-tothenew"` | no |
-| root\_common\_name | n/a | `any` | n/a | yes |
+| root\_common\_name | n/a | `string` | `""` | no |
 | root\_volume\_size | Root volume size of the EC2 instance | `number` | `100` | no |
 | security\_group\_id | Optional security group id to use instead of the default created | `string` | `""` | no |
-| security\_groups | A string value for Security Group ID | `list(string)` | n/a | yes |
-| server\_common\_name | n/a | `any` | n/a | yes |
+| security\_groups | A string value for Security Group ID | `list(string)` | `""` | no |
+| server\_common\_name | n/a | `string` | `""` | no |
 | source\_dest\_check | Source destination Check. Used for NAT or VPNs. | `bool` | `true` | no |
 | split\_tunnel | With split\_tunnel false, all client traffic will go through the VPN. | `bool` | `true` | no |
 | subnet\_id | The VPC Subnet IDs to launch in | `string` | n/a | yes |
-| subnet\_ids | Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved) | `list(string)` | n/a | yes |
+| subnet\_ids | Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved) | `list(string)` | `""` | no |
 | tags | Extra tags to attach to resources | `map(string)` | `{}` | no |
 | volume\_type | Volume type for EC2 instance default latest type | `string` | `"gp3"` | no |
 | vpc\_id | VPC Id to create resources | `string` | n/a | yes |
