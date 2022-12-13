@@ -53,7 +53,6 @@ module "vpn" {
 | ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized | `bool` | `true` | no |
 | enable\_self\_service\_portal | Specify whether to enable the self-service portal for the Client VPN endpoint | `bool` | `false` | no |
 | encrypted | Whether EBS volume will be encrypted. | `bool` | `true` | no |
-| iam\_instance\_profile | iam\_instance\_profile | `string` | `""` | no |
 | instance\_type | The type of instance to start | `string` | `"t3a.medium"` | no |
 | key\_name | Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource | `string` | n/a | yes |
 | logs\_retention | Retention in days for CloudWatch Log Group | `number` | `365` | no |
@@ -62,12 +61,12 @@ module "vpn" {
 | root\_common\_name | n/a | `string` | `""` | no |
 | root\_volume\_size | Root volume size of the EC2 instance | `number` | `100` | no |
 | security\_group\_id | Optional security group id to use instead of the default created | `string` | `""` | no |
-| security\_groups | A string value for Security Group ID | `list(string)` | `""` | no |
+| security\_groups | A string value for Security Group ID | `list(string)` | `[]` | no |
 | server\_common\_name | n/a | `string` | `""` | no |
 | source\_dest\_check | Source destination Check. Used for NAT or VPNs. | `bool` | `true` | no |
 | split\_tunnel | With split\_tunnel false, all client traffic will go through the VPN. | `bool` | `true` | no |
 | subnet\_id | The VPC Subnet IDs to launch in | `string` | n/a | yes |
-| subnet\_ids | Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved) | `list(string)` | `""` | no |
+| subnet\_ids | Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved) | `list(string)` | `[]` | no |
 | tags | Extra tags to attach to resources | `map(string)` | `{}` | no |
 | volume\_type | Volume type for EC2 instance default latest type | `string` | `"gp3"` | no |
 | vpc\_id | VPC Id to create resources | `string` | n/a | yes |
