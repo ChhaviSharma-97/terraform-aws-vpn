@@ -41,7 +41,7 @@ resource "aws_instance" "ec2" {
     volume_type           = var.volume_type
   }
   
-  resource "aws_eip" "pritunl-eip" {
+resource "aws_eip" "pritunl-eip" {
   vpc                       = true
   instance                  = aws_instance.ec2.id
   associate_with_private_ip = aws_instance.ec2.private_ip
