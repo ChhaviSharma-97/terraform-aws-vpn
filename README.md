@@ -37,40 +37,41 @@ module "vpn" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| allowed\_access\_groups | n/a | `any` | n/a | yes |
-| allowed\_cidr\_ranges | n/a | `any` | n/a | yes |
-| authentication\_saml\_provider\_arn | n/a | `any` | n/a | yes |
-| authentication\_type | n/a | `any` | n/a | yes |
+| allowed\_access\_groups | List of Access group IDs to allow access. Leave empty to allow all groups | `list(string)` | `[]` | no |
+| allowed\_cidr\_ranges | List of CIDR ranges from which access is allowed | `list(string)` | `[]` | no |
+| authentication\_saml\_provider\_arn | (Optional) The ARN of the IAM SAML identity provider if type is federated-authentication. | `any` | `null` | no |
+| authentication\_type | The type of client authentication to be used. Specify certificate-authentication to use certificate-based authentication, directory-service-authentication to use Active Directory authentication, or federated-authentication to use Federated Authentication via SAML 2.0. | `string` | `"certificate-authentication"` | no |
 | ca\_common\_name | n/a | `any` | n/a | yes |
-| cidr | n/a | `any` | `null` | no |
-| common\_tags | n/a | `any` | n/a | yes |
-| create\_aws\_ec2\_pritunl | n/a | `any` | n/a | yes |
-| create\_aws\_vpn | n/a | `any` | n/a | yes |
-| delete\_on\_termination | n/a | `any` | n/a | yes |
-| disable\_api\_stop | n/a | `any` | n/a | yes |
-| disable\_api\_termination | n/a | `any` | n/a | yes |
-| dns\_servers | n/a | `any` | n/a | yes |
-| ebs\_optimized | n/a | `any` | n/a | yes |
-| enable\_self\_service\_portal | n/a | `any` | n/a | yes |
-| encrypted | n/a | `any` | n/a | yes |
-| iam\_instance\_profile | n/a | `any` | n/a | yes |
-| instance\_type | n/a | `any` | n/a | yes |
-| key\_name | n/a | `any` | n/a | yes |
-| logs\_retention | n/a | `any` | n/a | yes |
-| organization\_name | n/a | `any` | n/a | yes |
-| project\_name\_prefix | n/a | `any` | n/a | yes |
+| cidr | Network CIDR to use for clients | `any` | n/a | yes |
+| common\_tags | A mapping of tags to assign to the resource | `map(string)` | n/a | yes |
+| create\_aws\_ec2\_pritunl | n/a | `bool` | `false` | no |
+| create\_aws\_vpn | n/a | `bool` | `false` | no |
+| delete\_on\_termination | Whether EBS volume will be deleted when instance gets deleted. | `bool` | `true` | no |
+| disable\_api\_stop | If true, enables EC2 Instance Stop Protection. | `bool` | `false` | no |
+| disable\_api\_termination | If true, enables EC2 Instance Termination Protection | `bool` | `true` | no |
+| dns\_servers | List of DNS Servers | `list(string)` | `[]` | no |
+| ebs\_optimized | If true, the launched EC2 instance will be EBS-optimized | `bool` | `true` | no |
+| enable\_self\_service\_portal | Specify whether to enable the self-service portal for the Client VPN endpoint | `bool` | `false` | no |
+| encrypted | Whether EBS volume will be encrypted. | `bool` | `true` | no |
+| iam\_instance\_profile | iam\_instance\_profile | `string` | `""` | no |
+| instance\_type | The type of instance to start | `string` | `"t3a.medium"` | no |
+| key\_name | Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource | `string` | n/a | yes |
+| logs\_retention | Retention in days for CloudWatch Log Group | `number` | `365` | no |
+| organization\_name | Name of organization to use in private certificate | `string` | `"ACME, Inc"` | no |
+| project\_name\_prefix | A string value to describe prefix of all the resources | `string` | `"dev-tothenew"` | no |
 | root\_common\_name | n/a | `any` | n/a | yes |
-| root\_volume\_size | n/a | `any` | n/a | yes |
-| security\_group\_id | n/a | `any` | n/a | yes |
+| root\_volume\_size | Root volume size of the EC2 instance | `number` | `100` | no |
+| security\_group\_id | Optional security group id to use instead of the default created | `string` | `""` | no |
+| security\_groups | A string value for Security Group ID | `list(string)` | n/a | yes |
 | server\_common\_name | n/a | `any` | n/a | yes |
-| source\_dest\_check | n/a | `any` | n/a | yes |
-| split\_tunnel | n/a | `any` | n/a | yes |
-| subnet\_id | ###############################Pritunl variables########################## | `any` | n/a | yes |
-| subnet\_ids | n/a | `any` | n/a | yes |
-| tags | n/a | `any` | n/a | yes |
-| volume\_type | n/a | `any` | n/a | yes |
-| vpc\_id | n/a | `any` | n/a | yes |
-| vpn\_port | n/a | `any` | n/a | yes |
+| source\_dest\_check | Source destination Check. Used for NAT or VPNs. | `bool` | `true` | no |
+| split\_tunnel | With split\_tunnel false, all client traffic will go through the VPN. | `bool` | `true` | no |
+| subnet\_id | The VPC Subnet IDs to launch in | `string` | n/a | yes |
+| subnet\_ids | Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved) | `list(string)` | n/a | yes |
+| tags | Extra tags to attach to resources | `map(string)` | `{}` | no |
+| volume\_type | Volume type for EC2 instance default latest type | `string` | `"gp3"` | no |
+| vpc\_id | VPC Id to create resources | `string` | n/a | yes |
+| vpn\_port | (Optional) The port number for the Client VPN endpoint. Valid values are 443 and 1194. Default value is 443. | `string` | `""` | no |
 
 ## Outputs
 
