@@ -6,14 +6,9 @@ variable "subnet_id" {
 variable "security_groups" {
   description = "A string value for Security Group ID"
   type        = list(string)
-  default = ""
+  default = []
 }
 
-variable "iam_instance_profile" {
-  description = "iam_instance_profile"
-  type        = string
-  default     = ""
-}
 variable "key_name" {
   description = "Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource"
   type        = string
@@ -104,7 +99,7 @@ variable "cidr" {
 variable "subnet_ids" {
   type        = list(string)
   description = "Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved)"
-  default = ""
+  default = []
 }
 
 variable "allowed_cidr_ranges" {
