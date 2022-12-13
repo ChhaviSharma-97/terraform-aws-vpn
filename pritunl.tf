@@ -20,11 +20,11 @@ data "template_file" "user_data" {
 }
 
 resource "aws_instance" "ec2" {
-  count       = !var.create_aws_vpn && var.create_aws_ec2_pritunl ? 1: 0
+  count                   = !var.create_aws_vpn && var.create_aws_ec2_pritunl ? 1 : 0
   ami                     = data.aws_ami.ubuntu.id
   instance_type           = var.instance_type
   subnet_id               = var.subnet_id
-  security_groups        = [var.security_group_id == "" ? aws_security_group.default[0].id : var.security_group_id]
+  security_groups         = [var.security_group_id == "" ? aws_security_group.default[0].id : var.security_group_id]
   key_name                = var.key_name
   ebs_optimized           = var.ebs_optimized
   disable_api_termination = var.disable_api_termination
