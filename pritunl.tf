@@ -31,7 +31,6 @@ resource "aws_instance" "ec2" {
   disable_api_stop        = var.disable_api_stop
   user_data_base64        = base64encode(data.template_file.user_data.rendered)
   source_dest_check       = var.source_dest_check
-  iam_instance_profile    = var.iam_instance_profile
   volume_tags             = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
   tags                    = merge(var.common_tags, tomap({ "Name" : "${var.project_name_prefix}-vpn" }))
 
