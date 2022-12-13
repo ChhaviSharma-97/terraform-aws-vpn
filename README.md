@@ -18,56 +18,64 @@ module "vpn" {
 ```
 
 <!--- BEGIN_TF_DOCS --->
+
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| terraform | >= 1.3.3 |
 
 ## Providers
 
-No providers.
-
-## Modules
-
-We have a VPN module which is basically a ec2 instance installing Pritunl usingthe userdata.sh. 
-
-## Resources
-
-Resources that will be created ith this module is 1 ec2 instance. Along with this we will need 1 security group, VPC ID, subnet ID.
+| Name | Version |
+|------|---------|
+| aws | n/a |
+| template | n/a |
+| tls | n/a |
 
 ## Inputs
 
-var.common_tags
-  A mapping of tags to assign to the resource
-
-var.key_name
-  Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource.
-
-var.security_groups
-  A string value for Security Group ID
-
-var.subnet_id
-  The VPC Subnet IDs to launch in
-
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| allowed\_access\_groups | n/a | `any` | n/a | yes |
+| allowed\_cidr\_ranges | n/a | `any` | n/a | yes |
+| authentication\_saml\_provider\_arn | n/a | `any` | n/a | yes |
+| authentication\_type | n/a | `any` | n/a | yes |
+| ca\_common\_name | n/a | `any` | n/a | yes |
+| cidr | n/a | `any` | `null` | no |
+| common\_tags | n/a | `any` | n/a | yes |
+| create\_aws\_ec2\_pritunl | n/a | `any` | n/a | yes |
+| create\_aws\_vpn | n/a | `any` | n/a | yes |
+| delete\_on\_termination | n/a | `any` | n/a | yes |
+| disable\_api\_stop | n/a | `any` | n/a | yes |
+| disable\_api\_termination | n/a | `any` | n/a | yes |
+| dns\_servers | n/a | `any` | n/a | yes |
+| ebs\_optimized | n/a | `any` | n/a | yes |
+| enable\_self\_service\_portal | n/a | `any` | n/a | yes |
+| encrypted | n/a | `any` | n/a | yes |
+| iam\_instance\_profile | n/a | `any` | n/a | yes |
+| instance\_type | n/a | `any` | n/a | yes |
+| key\_name | n/a | `any` | n/a | yes |
+| logs\_retention | n/a | `any` | n/a | yes |
+| organization\_name | n/a | `any` | n/a | yes |
+| project\_name\_prefix | n/a | `any` | n/a | yes |
+| root\_common\_name | n/a | `any` | n/a | yes |
+| root\_volume\_size | n/a | `any` | n/a | yes |
+| security\_group\_id | n/a | `any` | n/a | yes |
+| server\_common\_name | n/a | `any` | n/a | yes |
+| source\_dest\_check | n/a | `any` | n/a | yes |
+| split\_tunnel | n/a | `any` | n/a | yes |
+| subnet\_id | ###############################Pritunl variables########################## | `any` | n/a | yes |
+| subnet\_ids | n/a | `any` | n/a | yes |
+| tags | n/a | `any` | n/a | yes |
+| volume\_type | n/a | `any` | n/a | yes |
+| vpc\_id | n/a | `any` | n/a | yes |
+| vpn\_port | n/a | `any` | n/a | yes |
 
 ## Outputs
 
-output "private_ip" {
-  value = aws_instance.ec2.private_ip
-}
+No output.
 
-output "id" {
-  value = aws_instance.ec2.id
-}
-
-output "arn" {
-  value = aws_instance.ec2.arn
-}
-
-output "public_ip" {
-  value = aws_instance.ec2.public_ip
-}
 <!--- END_TF_DOCS --->
 
 ## Authors
