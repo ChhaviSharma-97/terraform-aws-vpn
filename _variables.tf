@@ -6,7 +6,7 @@ variable "subnet_id" {
 variable "security_groups" {
   description = "A string value for Security Group ID"
   type        = list(string)
-  default = []
+  default     = []
 }
 
 variable "key_name" {
@@ -80,11 +80,11 @@ variable "instance_type" {
 
 
 variable "create_aws_vpn" {
-  type = bool
+  type    = bool
   default = false
 }
 variable "create_aws_ec2_pritunl" {
-  type = bool
+  type    = bool
   default = false
 }
 # variable "name" {
@@ -93,13 +93,14 @@ variable "create_aws_ec2_pritunl" {
 
 variable "cidr" {
   description = "Network CIDR to use for clients"
-  default = ""
+  default     = ""
+  type        = string
 }
 
 variable "subnet_ids" {
   type        = list(string)
   description = "Subnet ID to associate clients (each subnet passed will create an VPN association - costs involved)"
-  default = []
+  default     = []
 }
 
 variable "allowed_cidr_ranges" {
@@ -127,6 +128,7 @@ variable "dns_servers" {
 variable "organization_name" {
   description = "Name of organization to use in private certificate"
   default     = "ACME, Inc"
+  type        = string
 }
 
 variable "tags" {
@@ -138,24 +140,29 @@ variable "tags" {
 variable "logs_retention" {
   default     = 365
   description = "Retention in days for CloudWatch Log Group"
+  type        = number
 }
 
 variable "authentication_type" {
+  type        = string
   default     = "certificate-authentication"
   description = "The type of client authentication to be used. Specify certificate-authentication to use certificate-based authentication, directory-service-authentication to use Active Directory authentication, or federated-authentication to use Federated Authentication via SAML 2.0."
 }
 
 variable "authentication_saml_provider_arn" {
+  type        = string
   default     = null
   description = "(Optional) The ARN of the IAM SAML identity provider if type is federated-authentication."
 }
 
 variable "split_tunnel" {
+  type        = bool
   default     = true
   description = "With split_tunnel false, all client traffic will go through the VPN."
 }
 
 variable "security_group_id" {
+  type        = string
   default     = ""
   description = "Optional security group id to use instead of the default created"
 }
@@ -167,18 +174,23 @@ variable "enable_self_service_portal" {
 }
 
 variable "vpn_port" {
-  default     = ""
-  description = " (Optional) The port number for the Client VPN endpoint. Valid values are 443 and 1194. Default value is 443."
+  type        = number
+  default     = null
+  description = " (Optional) The port number for the Client VPN endpoint. Valid values are 443 and 1194. Default value is 443.  In case of pritunl it can be any UDP port value set from pritunl console"
 }
 
 variable "ca_common_name" {
   default = ""
+  type    = string
 }
 
 variable "root_common_name" {
   default = ""
+  type    = string
 }
 
 variable "server_common_name" {
   default = ""
+  type    = string
 }
+
