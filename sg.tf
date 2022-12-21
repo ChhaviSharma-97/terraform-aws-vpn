@@ -17,20 +17,14 @@ resource "aws_security_group" "default" {
   }
   ingress {
     from_port   = var.vpn_port
-    protocol    = "-1"
+    protocol    = "udp"
     to_port     = var.vpn_port
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port   = 80
-    protocol    = "-1"
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 443
-    protocol    = "-1"
-    to_port     = 443
+    from_port   = -1
+    protocol    = "all"
+    to_port     = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
