@@ -29,6 +29,16 @@ module "vpn" {
 |------|---------|
 | terraform | >= 1.3.3 |
 
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) | resource |
+| [aws_eip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eip) | resource |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_ami](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ami) | data source |
+| [template_file](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -80,4 +90,4 @@ Module managed by [TO THE NEW Pvt. Ltd.](https://github.com/tothenew)
 
 ## License
 
-Apache 2 Licensed. See [LICENSE](https://github.com/ChhaviSharma-97/terraform-aws-vpn/blob/dev/LICENSE) for full details.
+Apache 2 Licensed. See [LICENSE](https://github.com/tothenew/terraform-aws-vpn/blob/main/LICENSE) for full details.
