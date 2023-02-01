@@ -85,7 +85,7 @@ variable "create_aws_vpn" {
 }
 variable "create_aws_ec2_pritunl" {
   type    = bool
-  default = false
+  default = true
 }
 # variable "name" {
 #   description = "Name prefix for the resources of this stack"
